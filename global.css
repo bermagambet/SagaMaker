@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  --color-*: initial;
+  --color-primary: #ffffff;
+  --color-secondary: #b89e9e;
+  --color-action-primary: #e82630;
+  --color-action-secondary: #362b2b;
+  --color-footer: #362b2b;
+  --color-icon: #b89e9e;
+}
+
+@layer base {
+  @font-face {
+    font-family: "PlusJakartaSans";
+    src: local("PlusJakartaSans"),
+      url(./assets/fonts/PlusJakartaSans.ttf) format("ttf");
+  }
+}
