@@ -11,5 +11,6 @@ export type ButtonProps = {
 
 export type RadioButtonProps = {
   children: ReactNode | string;
+  radioStatus: boolean;
   onPress: ((event: GestureResponderEvent) => void) | null | undefined;
 };

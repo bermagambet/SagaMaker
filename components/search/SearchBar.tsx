@@ -1,19 +1,29 @@
-import { Fragment, useState } from "react";
-import { Text, TextInput, View } from "react-native";
-import { Button, RadioButton } from "../button";
+import { useState } from "react";
+import { TextInput, View } from "react-native";
+import { Button } from "../button";
 import { IconSymbol } from "../ui";
 import BottomModal from "./BottomModal";
-import { SearchBarProps } from "./types";
+import FilterModal from "./FilterModal";
+import SortModal from "./SortModal";
+import { SearchBarProps, SortTypes, Tags } from "./types";
 
 const SearchBar = ({ onSearch, tags = [] }: SearchBarProps) => {
   const [searchText, setSearchText] = useState<string>("");
+
   const [showSortModal, setShowSortModal] = useState<boolean>(false);
   const [showFilterModal, setShowFilterModal] = useState<boolean>(false);
+
+  const [sortMode, setSortMode] = useState<SortTypes>("popular");
+  const [chosenTags, setChosenTags] = useState<Tags>({});
 
   const handleOnSearch = (text: string) => {
     setSearchText(text);
     onSearch(text);
   };
+
+  const handleOnSort = () => {};
+
+  const handleOnFilter = () => {};
 
   return (
     <View className="flex flex-col gap-y-4">
@@ -53,81 +63,23 @@ const SearchBar = ({ onSearch, tags = [] }: SearchBarProps) => {
         </Button>
       </View>
       <BottomModal
-        children={
-          <Fragment>
-            <RadioButton children="Most Popular" onPress={() => {}} />
-            <RadioButton children="Newest" onPress={() => {}} />
-            <RadioButton children="Highest Rated" onPress={() => {}} />
-            <RadioButton children="Shortest" onPress={() => {}} />
-            <RadioButton children="Longest" onPress={() => {}} />
-          </Fragment>
-        }
+        children={<SortModal sortMode={sortMode} setSortMode={setSortMode} />}
         showModal={showSortModal}
         setShowModal={setShowSortModal}
         title="Sort By"
         onClose={() => {}}
         onApply={() => {
           setShowSortModal(false);
+          handleOnSort();
         }}
       />
       <BottomModal
         children={
-          <Fragment>
-            <View className="flex flex-col gap-y-[8px]">
-              <Text className="text-primary text-2xl font-semibold">
-                Length (Words)
-              </Text>
-              <View className="flex flex-row justify-between">
-                <View className="flex flex-col gap-y-[4px] w-[47%] ">
-                  <Text className="text-primary text-xl">From</Text>
-                  <TextInput
-                    className="text-lg text-primary bg-action-secondary rounded-2xl px-[10px]"
-                    placeholderTextColor="#b89e9e"
-                    placeholder="0"
-                  />
-                </View>
-                <View className="flex flex-col gap-y-[4px] w-[47%] ">
-                  <Text className="text-primary text-xl">To</Text>
-                  <TextInput
-                    className="text-lg text-primary bg-action-secondary rounded-2xl px-[10px]"
-                    placeholderTextColor="#b89e9e"
-                    placeholder="1,000,000"
-                  />
-                </View>
-              </View>
-            </View>
-            <View className="flex flex-col gap-y-[8px]">
-              <Text className="text-primary text-2xl font-semibold">
-                Publish Date
-              </Text>
-              <View className="flex flex-row justify-between">
-                <View className="flex flex-col gap-y-[4px] w-[47%] ">
-                  <Text className="text-primary text-xl">Start Date</Text>
-                  <TextInput
-                    className="text-lg text-primary bg-action-secondary rounded-2xl px-[10px]"
-                    placeholderTextColor="#b89e9e"
-                    placeholder="MM/DD/YYYY"
-                  />
-                </View>
-                <View className="flex flex-col gap-y-[4px] w-[47%] ">
-                  <Text className="text-primary text-xl">End Date</Text>
-                  <TextInput
-                    className="text-lg text-primary bg-action-secondary rounded-2xl px-[10px]"
-                    placeholderTextColor="#b89e9e"
-                    placeholder="MM/DD/YYYY"
-                  />
-                </View>
-              </View>
-            </View>
-            <View className="flex flex-col gap-y-[8px]">
-              <Text className="text-primary text-2xl font-semibold">Tags</Text>
-              <View className="flex flex-row flex-wrap gap-x-[8px] gap-y-[8px]">
-                {tags?.map((el) => (
-                  <Button key={el} children={el} onPress={() => {}} />
-                ))}
-              </View>
-            </View>
-          </Fragment>
+          <FilterModal
+            tags={tags}
+            chosenTags={chosenTags}
+            setChosenTags={setChosenTags}
+          />
         }
         showModal={showFilterModal}
         setShowModal={setShowFilterModal}
@@ -135,6 +87,7 @@ const SearchBar = ({ onSearch, tags = [] }: SearchBarProps) => {
         onClose={() => {}}
         onApply={() => {
           setShowFilterModal(false);
+          handleOnFilter();
         }}
       />
     </View>

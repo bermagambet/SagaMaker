@@ -30,9 +30,9 @@ const Button = ({
   return (
     <Pressable
       className={`border-solid border-1 px-[15px] ${clsx({
-        [primaryBg]: isPrimary,
-        [secondaryBg]: !isPrimary,
-        [isPrimary ? hoverPrimary : hoverSecondary]: active || hoverStatus,
+        [primaryBg]: isPrimary || active,
+        [secondaryBg]: !isPrimary && !active,
+        [isPrimary ? hoverPrimary : hoverSecondary]: hoverStatus,
         [fullContainer]: fullWidth,
         [defaultContainer]: !fullWidth,
       })}`}
@@ -43,7 +43,7 @@ const Button = ({
       <View className="flex flex-col justify-center self-center">
         <Text
           className={`text-primary ${clsx({
-            [hoverText]: active || hoverStatus,
+            [hoverText]: hoverStatus,
             [fullText]: fullWidth,
             [defaultText]: !fullWidth,
           })} `}
