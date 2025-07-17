@@ -210,7 +210,19 @@ export default function MyCampaigns() {
     <View className="flex col gap-y-24 px-[8px] py-[24px]">
       <Stack.Screen options={{ title: "My Campaigns" }} />
       <View className="flex flex-col gap-y-8">
-        <SearchBar onSearch={() => {}} />
+        <SearchBar
+          onSearch={() => {}}
+          tags={[
+            "Fantasy",
+            "Sci-Fi",
+            "Romance",
+            "Thriller",
+            "Detective",
+            "Epic",
+            "Mystery",
+            "Urban",
+          ]}
+        />
         <ScrollView contentContainerClassName="flex flex-col gap-y-4">
           {items?.map(({ id, ...rest }) => (
             <ItemCardExpanded key={id} {...rest} />

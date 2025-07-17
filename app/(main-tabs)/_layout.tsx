@@ -39,7 +39,7 @@ export default function MainTabsLayout() {
             </View>
           ),
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="home-outline" color={color} />
+            <IconSymbol size={28} name="home-sharp" color={color} />
           ),
         }}
       />
@@ -48,7 +48,7 @@ export default function MainTabsLayout() {
         options={{
           title: "Explore",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="compass-outline" color={color} />
+            <IconSymbol size={28} name="compass-sharp" color={color} />
           ),
         }}
       />
@@ -66,7 +66,7 @@ export default function MainTabsLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="person-outline" color={color} />
+            <IconSymbol size={28} name="person-sharp" color={color} />
           ),
         }}
       />

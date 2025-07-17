@@ -21,6 +21,7 @@ const Button = ({
   children,
   type,
   fullWidth = false,
+  active = false,
   onPress,
 }: ButtonProps) => {
   const [hoverStatus, setHoverStatus] = useState<boolean>(false);
@@ -31,7 +32,7 @@ const Button = ({
       className={`border-solid border-1 px-[15px] ${clsx({
         [primaryBg]: isPrimary,
         [secondaryBg]: !isPrimary,
-        [isPrimary ? hoverPrimary : hoverSecondary]: hoverStatus,
+        [isPrimary ? hoverPrimary : hoverSecondary]: active || hoverStatus,
         [fullContainer]: fullWidth,
         [defaultContainer]: !fullWidth,
       })}`}
@@ -42,7 +43,7 @@ const Button = ({
       <View className="flex flex-col justify-center self-center">
         <Text
           className={`text-primary ${clsx({
-            [hoverText]: hoverStatus,
+            [hoverText]: active || hoverStatus,
             [fullText]: fullWidth,
             [defaultText]: !fullWidth,
           })} `}

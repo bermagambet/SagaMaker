@@ -18,4 +18,8 @@
     src: local("PlusJakartaSans"),
       url(./assets/fonts/PlusJakartaSans.ttf) format("ttf");
   }
+
+  * {
+    letter-spacing: 1px;
+  }
 }
